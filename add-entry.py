@@ -17,10 +17,7 @@ def arguments():
     target.add_argument("--host", "-t", dest="HOST", help="IP/Hostname of Entry", required=True)
     target.add_argument("--username", "-u", dest="USERNAME", help="Username used by RDP destination", required=True)
     target.add_argument("--password", "-p", dest="PASSWORD", help="Password used by RDP destination", required=True)
-
-
     options = parser.parse_args()
-
     return options
 def get_token(host, port, username, password):
     parameters = {
