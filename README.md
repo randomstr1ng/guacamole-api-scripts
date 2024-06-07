@@ -28,3 +28,27 @@ Target:
   --password PASSWORD, -p PASSWORD
                         Password used by RDP destination
 ```
+
+## Change password for a user via API
+```bash
+$ python3 change-password.py -h                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
+usage: change-password.py [options]
+
+This script allows to the password of your user in Apache Guacamole.
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+Target:
+  --guacamole-host GUACAMOLE_HOST, -ghost GUACAMOLE_HOST
+                        IP/Hostname of Apache Guacamole Server
+  --guacamole-port GUACAMOLE_PORT, -gport GUACAMOLE_PORT
+                        PORT of Apache Guacamole Server
+  --guacamole-user GUACAMOLE_USER, -guser GUACAMOLE_USER
+                        Username for Apache Guacamole Server
+  --guacamole-password GUACAMOLE_PASSWORD, -gpass GUACAMOLE_PASSWORD
+                        Password for Apache Guacamole Server
+  --guacamole-new-password GUACAMOLE_NEW_PASSWORD, -new-pass GUACAMOLE_NEW_PASSWORD
+                        New Password
+```
