@@ -4,6 +4,8 @@ import requests
 from argparse import ArgumentParser
 
 requests.packages.urllib3.disable_warnings()
+
+
 def arguments():
     description = "This script allows to the password of your user in Apache Guacamole."
     usage = "%(prog)s [options]"
@@ -26,6 +28,7 @@ def get_token(host, port, username, password):
         "Content-Type": "application/x-www-form-urlencoded"
     }
     response = requests.post(f"https://{host}:{port}/api/tokens", headers=headers, data=parameters, verify=False)
+    print(response.text)
     token = response.json()["authToken"]
     datasource = response.json()["dataSource"]
     return token, datasource
@@ -33,12 +36,14 @@ def get_token(host, port, username, password):
 def change_password(host, port, token, datasource, old_password, new_password):
     headers = {
         "Content-Type": "application/json",
+        "Guacamole-Token": token,
     }
     parameters = {
         "oldPassword": old_password,
         "newPassword": new_password
     }
-    response = requests.put(f"https://{host}:{port}/api/session/data/{datasource}/password?toke={token}", headers=headers, json=parameters, verify=False)
+    print(parameters)
+    response = requests.put(f"https://{host}:{port}/api/session/data/{datasource}/password", headers=headers, json=parameters, verify=False)
     if response.ok:
         print(f"Password changed successfully")
     else:
