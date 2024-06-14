@@ -10,7 +10,7 @@ def arguments():
     parser = ArgumentParser(usage=usage, description=description)
     target = parser.add_argument_group("Target")
     target.add_argument("--guacamole-host","-ghost", dest="GUACAMOLE_HOST", help="IP/Hostname of Apache Guacamole Server", required=True)
-    target.add_argument("--guacamole-port","-gport", dest="GUACAMOLE_PORT", help="PORT of Apache Guacamole Server", default="443")
+    target.add_argument("--guacamole-port","-gport", dest="GUACAMOLE_PORT", help="PORT of Apache Guacamole Server", default="8443")
     target.add_argument("--guacamole-user", "-guser", dest = "GUACAMOLE_USER", help = "Username for Apache Guacamole Server", default = "guacadmin")
     target.add_argument("--guacamole-password", "-gpass", dest="GUACAMOLE_PASSWORD", help="Password for Apache Guacamole Server", required=True)
     target.add_argument("--entry-name", "-n", dest="NAME", help="Name for the Entry", required=True)
@@ -47,7 +47,7 @@ def add_rdp_connection(host, port, token, datasource, connection_name, hostname,
 def main():
     options = arguments()
     token, datasource = get_token(host=options.GUACAMOLE_HOST, port=options.GUACAMOLE_PORT, username=options.GUACAMOLE_USER, password=options.GUACAMOLE_PASSWORD)
-    add_rdp_connection(host=options.HOST,port=options.PORT, token=token, datasource=datasource, connection_name=options.NAME, hostname=options.HOST, username=options.USERNAME, password=options.PASSWORD)
+    add_rdp_connection(host=options.GUACAMOLE_HOST,port=options.GUACAMOLE_PORT, token=token, datasource=datasource, connection_name=options.NAME, hostname=options.HOST, username=options.USERNAME, password=options.PASSWORD)
 
 if __name__ == "__main__":
     main()

@@ -28,7 +28,6 @@ def get_token(host, port, username, password):
         "Content-Type": "application/x-www-form-urlencoded"
     }
     response = requests.post(f"https://{host}:{port}/api/tokens", headers=headers, data=parameters, verify=False)
-    print(response.text)
     token = response.json()["authToken"]
     datasource = response.json()["dataSource"]
     return token, datasource
@@ -42,8 +41,8 @@ def change_password(host, port, token, datasource, old_password, new_password):
         "oldPassword": old_password,
         "newPassword": new_password
     }
-    print(parameters)
-    response = requests.put(f"https://{host}:{port}/api/session/data/{datasource}/password", headers=headers, json=parameters, verify=False)
+    #proxies = {"https": "http://127.0.0.1:8080"}
+    response = requests.put(f"https://{host}:{port}/api/session/data/{datasource}/users/guacadmin/password", headers=headers, json=parameters, verify=False)
     if response.ok:
         print(f"Password changed successfully")
     else:
